@@ -1,0 +1,12 @@
+process.env.NODE_ENV = 'test';
+process.env.PORT = '5000';
+process.env.FRONTEND_URL = 'http://localhost:5173';
+process.env.OWNER_EMAIL = 'owner@example.com';
+process.env.SMTP_HOST = 'smtp.example.com';
+process.env.SMTP_PORT = '587';
+process.env.SMTP_SECURE = 'false';
+process.env.SMTP_USER = 'test-user';
+process.env.SMTP_PASS = 'test-pass';
+process.env.SMTP_FROM = 'Portfolio Contact <no-reply@example.com>';
+process.env.OPENAI_API_KEY = 'test-openai-key';
+process.env.OPENAI_MODEL = 'gpt-4o-mini';
