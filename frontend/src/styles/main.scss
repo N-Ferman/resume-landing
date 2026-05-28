@@ -119,11 +119,16 @@ textarea:focus-visible {
   color: var(--color-primary-dark);
 }
 
+.button--secondary:hover {
+  border-color: var(--color-primary);
+}
+
 .hero {
-  min-height: 92vh;
+  min-height: 96vh;
   border-bottom: 1px solid var(--color-line);
   background:
-    linear-gradient(135deg, rgb(19 95 99 / 0.12), transparent 36%),
+    radial-gradient(circle at 82% 18%, rgb(29 111 237 / 0.18), transparent 30%),
+    linear-gradient(135deg, rgb(22 79 99 / 0.14), transparent 42%),
     var(--color-bg);
 }
 
@@ -152,9 +157,14 @@ textarea:focus-visible {
 
 .hero__content {
   display: grid;
-  align-content: center;
+  gap: 34px;
+  align-items: center;
   min-height: calc(92vh - 88px);
   padding-bottom: 48px;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.82fr);
+  }
 }
 
 .hero__description {
@@ -163,8 +173,39 @@ textarea:focus-visible {
   font-size: 1.12rem;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero__portrait {
+  position: relative;
+  margin: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface);
+}
+
+.hero__portrait::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background: linear-gradient(180deg, transparent 62%, rgb(11 51 65 / 0.22));
+  pointer-events: none;
+}
+
+.hero__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .about__panel,
 .ai-summary__actions,
+.certificate__media,
 .contact-form,
 .project-card,
 .workflow-card {
@@ -222,8 +263,9 @@ textarea:focus-visible {
 }
 
 .workflow,
-.contacts {
-  background: #eeeeE7;
+.contacts,
+.certificate {
+  background: #eeece4;
 }
 
 .workflow__grid,
@@ -253,6 +295,41 @@ textarea:focus-visible {
   margin-top: 16px;
   color: var(--color-primary-dark);
   font-weight: 900;
+}
+
+.certificate__inner {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+
+  @media (min-width: 880px) {
+    grid-template-columns: minmax(0, 0.7fr) minmax(340px, 0.85fr);
+  }
+}
+
+.certificate__content p {
+  max-width: 560px;
+}
+
+.certificate__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.certificate__media:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.certificate__media img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .ai-summary__inner {
