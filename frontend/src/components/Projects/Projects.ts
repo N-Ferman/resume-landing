@@ -20,7 +20,7 @@ export function createProjectsSection(): HTMLElement {
     <section class="section projects" aria-labelledby="projects-title">
       <div class="container">
         <p class="eyebrow">Кейсы / Опыт</p>
-        <h2 id="projects-title">Проекты с личным вкладом</h2>
+        <h2 id="projects-title">Проекты</h2>
         <div class="projects__grid">${cards}</div>
       </div>
     </section>

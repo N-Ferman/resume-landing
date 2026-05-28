@@ -8,14 +8,18 @@ const openai = new OpenAI({
 });
 
 export async function generateProfileSummary(): Promise<string> {
+  const requestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
   const prompt = [
-    'Create a professional profile summary in Russian.',
+    'Create a fresh professional profile summary in Russian.',
     'Do not invent facts. Use only the provided placeholders and profile data.',
     'Keep the text suitable for a junior developer portfolio landing page.',
     'Return plain text only, without markdown, headings, lists, or bold formatting.',
     'The summary must be 4-6 complete sentences.',
     'Do not return only the name.',
+    'Each time, slightly vary the wording, sentence structure, and order of emphasis.',
     'Mention the candidate name, target role, Python backend focus, key technologies, Hexlet projects, legal background, and search for the first commercial developer role.',
+    `Request ID: ${requestId}`,
     '',
     `Name: ${profilePromptData.name}`,
     `Role: ${profilePromptData.role}`,
@@ -49,7 +53,7 @@ export async function generateProfileSummary(): Promise<string> {
           content: prompt,
         },
       ],
-      temperature: 0.4,
+      temperature: 0.7,
       max_tokens: 180,
     });
 

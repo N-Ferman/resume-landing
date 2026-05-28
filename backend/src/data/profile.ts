@@ -1,45 +1,136 @@
+```ts
 import type { ProfilePromptData } from '../types/profile.types.js';
 
 export const profilePromptData: ProfilePromptData = {
   name: 'Ферман Надежда',
+
   role: 'Python Backend Developer (Junior)',
+
   experience:
-    'В рамках обучения на Хекслете реализовала 4 учебных проекта, приближенных к задачам коммерческой разработки.',
-  techStack: ['Python', 'Django', 'Flask', 'PostgreSQL', 'Git', 'HTML5', 'CSS3'],
-  directions: ['Python backend-разработка', 'Django и Flask приложения', 'PostgreSQL', 'HTTP-запросы и обработка ошибок'],
+    'В рамках обучения и pet-проектов реализовала backend- и fullstack-приложения на Python с использованием Django, Flask, FastAPI и PostgreSQL.',
+
+  techStack: [
+    'Python',
+    'Django',
+    'Django REST Framework',
+    'FastAPI',
+    'Flask',
+    'PostgreSQL',
+    'SQLAlchemy',
+    'JWT',
+    'Docker',
+    'Git',
+    'HTML5',
+    'CSS3',
+  ],
+
+  directions: [
+    'Backend-разработка на Python',
+    'REST API',
+    'Аутентификация и авторизация',
+    'PostgreSQL и ORM',
+    'Django / Flask / FastAPI приложения',
+    'Валидация и обработка ошибок',
+    'Docker и контейнеризация',
+  ],
+
   contacts: {
     email: 'nferman01@gmail.com',
     telegram: 'https://t.me/N_Ferman',
     github: 'https://github.com/N-Ferman',
   },
+
   education: [
-    'Хекслет: профессия «Python-разработчик»',
-    'Высшее образование: Московская государственная юридическая академия',
+    'Хекслет — профессия «Python-разработчик»',
+    'Московская государственная юридическая академия',
   ],
+
   projects: [
     {
-      title: 'Task Manager',
-      description: 'Django-приложение для управления задачами, постановки целей и отслеживания их статусов.',
-      stack: ['Python', 'Django', 'PostgreSQL'],
+      title: 'Backend Authentication Project',
+      description:
+        'Backend-приложение с системой аутентификации и авторизации пользователей.',
+
+      stack: [
+        'Python',
+        'Django REST Framework',
+        'PostgreSQL',
+        'JWT',
+        'Docker',
+      ],
+
       contribution:
-        'Реализовала аутентификацию и авторизацию пользователей, CRUD-операции для задач, статусов и меток, схему БД на Django ORM.',
+        'Реализовала регистрацию пользователей, JWT-аутентификацию, permissions, защищенные API endpoints, backend-валидацию, тестирование API и Docker-конфигурацию.',
     },
+
+    {
+      title: 'Org Structure API',
+
+      description:
+        'REST API для управления организационной структурой компании и древовидной иерархией подразделений.',
+
+      stack: [
+        'Python',
+        'FastAPI',
+        'PostgreSQL',
+        'SQLAlchemy',
+        'Docker',
+        'Pytest',
+      ],
+
+      contribution:
+        'Спроектировала структуру БД, реализовала CRUD для подразделений и сотрудников, self-referencing связи, ORM-модели, REST API, тестирование и обработку ошибок.',
+    },
+
+    {
+      title: 'Task Manager',
+
+      description:
+        'Django-приложение для управления задачами, статусами и метками.',
+
+      stack: [
+        'Python',
+        'Django',
+        'PostgreSQL',
+      ],
+
+      contribution:
+        'Реализовала аутентификацию и авторизацию пользователей, CRUD-операции, работу с Django ORM и структуру реляционной БД.',
+    },
+
     {
       title: 'Page Analyzer',
+
       description:
-        'Fullstack-приложение на Flask для SEO-анализа веб-страниц: статус-коды, заголовки h1 и описания.',
-      stack: ['Python', 'Flask', 'PostgreSQL'],
+        'Fullstack-приложение на Flask для SEO-анализа веб-страниц.',
+
+      stack: [
+        'Python',
+        'Flask',
+        'PostgreSQL',
+      ],
+
       contribution:
-        'Реализовала сбор данных с сайтов, хранение данных в реляционной БД, HTTP-запросы и обработку ошибок.',
+        'Реализовала HTTP-запросы, сбор и хранение данных, обработку ошибок и интеграцию с PostgreSQL.',
     },
+
     {
       title: 'Gendiff',
-      description: 'Инструмент для поиска различий в конфигурационных файлах JSON и YAML.',
-      stack: ['Python'],
+
+      description:
+        'CLI-инструмент для поиска различий в JSON- и YAML-конфигурациях.',
+
+      stack: [
+        'Python',
+      ],
+
       contribution:
-        'Реализовала рекурсивный обход структур данных и форматы вывода stylish, plain и json.',
+        'Реализовала рекурсивное сравнение структур данных и несколько форматов вывода результатов.',
     },
   ],
+
   about:
-    'Бывший юрист с аналитическим складом ума и вниманием к деталям. Перешла в разработку, потому что любит создавать четкие, логичные системы и доводить их до рабочего состояния. Быстро учится, умеет самостоятельно находить и структурировать информацию. Ищет первую коммерческую работу.',
+    'Бывший юрист, перешедший в backend-разработку. Имеет аналитический склад ума, внимание к деталям и системный подход к решению задач. Интересуется backend-архитектурой, REST API и проектированием приложений. Быстро осваивает новые технологии, умеет самостоятельно структурировать информацию и доводить решения до рабочего состояния. Ищет первую коммерческую позицию Python Backend Developer.',
 };
+```
+

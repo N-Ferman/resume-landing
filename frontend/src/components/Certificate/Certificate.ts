@@ -17,6 +17,8 @@ export function createCertificateSection(): HTMLElement {
             src="/assets/images/hexlet-certificate.jpg"
             alt="Сертификат Hexlet о завершении курса Python Development"
             loading="lazy"
+            width="640"
+            height="905"
           />
         </a>
       </div>

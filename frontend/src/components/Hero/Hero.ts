@@ -19,7 +19,7 @@ export function createHeroSection(): HTMLElement {
           </div>
         </div>
         <figure class="hero__portrait">
-          <img src="/assets/images/profile-photo.jpg" alt="Ферман Надежда" />
+          <img src="/assets/images/profile-photo.jpg" alt="Ферман Надежда" width="720" height="900" />
         </figure>
       </div>
     </header>
