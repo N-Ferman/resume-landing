@@ -1,4 +1,3 @@
-```ts
 import type { ProfilePromptData } from '../types/profile.types.js';
 
 export const profilePromptData: ProfilePromptData = {
@@ -132,5 +131,3 @@ export const profilePromptData: ProfilePromptData = {
   about:
     'Бывший юрист, перешедший в backend-разработку. Имеет аналитический склад ума, внимание к деталям и системный подход к решению задач. Интересуется backend-архитектурой, REST API и проектированием приложений. Быстро осваивает новые технологии, умеет самостоятельно структурировать информацию и доводить решения до рабочего состояния. Ищет первую коммерческую позицию Python Backend Developer.',
 };
-```
-
