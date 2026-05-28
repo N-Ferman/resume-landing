@@ -1,23 +1,19 @@
 import type { AiSummaryResponse } from '../types/ai.types';
+import { API_BASE_URL, getBackendErrorMessage } from './apiClient';
 
-const AI_SUMMARY_ENDPOINT = '/api/ai/summary';
+const AI_SUMMARY_ENDPOINT = `${API_BASE_URL}/api/ai/summary`;
 
 export async function generateAiSummary(): Promise<AiSummaryResponse> {
-  await new Promise((resolve) => window.setTimeout(resolve, 900));
-
-  if (import.meta.env.DEV) {
-    return {
-      summary:
-        '[Ваше имя] - junior Full-Stack разработчик, который показывает навыки frontend-разработки, работы с API, backend-структуры и безопасной AI-интеграции через сервер.',
-    };
-  }
-
   const response = await fetch(AI_SUMMARY_ENDPOINT, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({}),
   });
 
   if (!response.ok) {
-    throw new Error('Не удалось сгенерировать AI-summary. Попробуйте позже.');
+    throw new Error(await getBackendErrorMessage(response));
   }
 
   return response.json() as Promise<AiSummaryResponse>;

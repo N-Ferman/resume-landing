@@ -1,16 +1,9 @@
 import type { ContactFormData, ContactResponse } from '../types/contact.types';
+import { API_BASE_URL, getBackendErrorMessage } from './apiClient';
 
-const CONTACT_ENDPOINT = '/api/contact';
+const CONTACT_ENDPOINT = `${API_BASE_URL}/api/contact`;
 
 export async function sendContactForm(data: ContactFormData): Promise<ContactResponse> {
-  await new Promise((resolve) => window.setTimeout(resolve, 800));
-
-  if (import.meta.env.DEV) {
-    return {
-      message: 'Форма успешно отправлена. Backend mock вернул успешный ответ.',
-    };
-  }
-
   const response = await fetch(CONTACT_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -20,7 +13,7 @@ export async function sendContactForm(data: ContactFormData): Promise<ContactRes
   });
 
   if (!response.ok) {
-    throw new Error('Не удалось отправить форму. Попробуйте позже.');
+    throw new Error(await getBackendErrorMessage(response));
   }
 
   return response.json() as Promise<ContactResponse>;
