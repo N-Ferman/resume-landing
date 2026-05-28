@@ -12,14 +12,14 @@ export async function generateProfileSummary(): Promise<string> {
 
   const prompt = [
     'Create a fresh professional profile summary in Russian.',
-    'Do not invent facts. Use only the provided placeholders and profile data.',
+    'Do not invent facts. Use only the provided profile data.',
     'Keep the text suitable for a junior developer portfolio landing page.',
     'Return plain text only, without markdown, headings, lists, or bold formatting.',
     'The summary must be 4-6 complete sentences.',
     'Do not return only the name.',
-    'Each time, slightly vary the wording, sentence structure, and order of emphasis.',
-    'Mention the candidate name, target role, Python backend focus, key technologies, Hexlet projects, legal background, and search for the first commercial developer role.',
-    `Request ID: ${requestId}`,
+    'Each time, noticeably vary the wording, sentence structure, opening sentence, and order of emphasis.',
+    'Mention the candidate name, target role, Python backend focus, key technologies, projects, legal background, and search for the first commercial developer role.',
+    `Variation seed: ${requestId}`,
     '',
     `Name: ${profilePromptData.name}`,
     `Role: ${profilePromptData.role}`,
@@ -46,15 +46,17 @@ export async function generateProfileSummary(): Promise<string> {
         {
           role: 'system',
           content:
-            'You write clear, honest portfolio summaries for junior developers. Always produce a complete paragraph, not a title.',
+            'You write clear, honest portfolio summaries for junior developers. Always produce a complete paragraph, not a title. Avoid repeating the same wording between requests.',
         },
         {
           role: 'user',
           content: prompt,
         },
       ],
-      temperature: 0.7,
-      max_tokens: 180,
+      temperature: 0.95,
+      presence_penalty: 0.4,
+      frequency_penalty: 0.35,
+      max_tokens: 230,
     });
 
     const summary = completion.choices[0]?.message?.content?.trim();
@@ -93,15 +95,32 @@ function removeMarkdown(summary: string): string {
 
 function createFallbackSummary(): string {
   const projectNames = profilePromptData.projects.map((project) => project.title).join(', ');
-  const mainStack = profilePromptData.techStack.slice(0, 5).join(', ');
+  const mainStack = profilePromptData.techStack.slice(0, 7).join(', ');
+  const variants = [
+    [
+      `${profilePromptData.name} — ${profilePromptData.role} с фокусом на Python backend-разработку и создании REST API.`,
+      `В портфолио есть проекты ${projectNames}, где она работала с серверной архитектурой, базами данных, аутентификацией, ORM и тестированием.`,
+      `Основной стек включает ${mainStack}, а также Docker и практику backend-валидации.`,
+      'Юридический опыт помогает ей внимательно анализировать требования, структурировать информацию и доводить решения до рабочего состояния.',
+      'Сейчас Надежда ищет первую коммерческую позицию, где сможет применить аккуратность, ответственность и backend-навыки на пользу продукту.',
+    ],
+    [
+      `${profilePromptData.name} развиваетcя как ${profilePromptData.role} и делает упор на backend-приложения на Python.`,
+      `Среди ее проектов — ${projectNames}, которые показывают работу с REST API, PostgreSQL, ролями доступа, Docker и автотестами.`,
+      `Она использует ${mainStack} и уделяет внимание структуре БД, обработке ошибок и понятной архитектуре.`,
+      'Бэкграунд в юриспруденции усиливает ее внимательность к деталям и умение разбирать сложные требования.',
+      'Надежда ищет первую коммерческую роль в разработке, чтобы расти в backend и приносить практическую пользу команде.',
+    ],
+    [
+      `${profilePromptData.name} — junior backend-разработчик, ориентированный на Python, REST API и надежную серверную логику.`,
+      `В проектах ${projectNames} она самостоятельно реализовывала API endpoints, ORM-модели, валидацию, права доступа и тестирование.`,
+      `Техническая база включает ${mainStack}, Docker, Pytest и работу с PostgreSQL.`,
+      'Переход из юридической сферы дал ей сильную аналитическую базу, аккуратность и системный подход.',
+      'Сейчас она ищет первую коммерческую позицию Python Backend Developer и готова развиваться в продуктовой разработке.',
+    ],
+  ];
 
-  return [
-    `${profilePromptData.name} — ${profilePromptData.role} с фокусом на Python backend-разработку.`,
-    `В рамках обучения на Хекслете она реализовала учебные проекты, приближенные к коммерческим задачам: ${projectNames}.`,
-    `В работе использует ${mainStack}, умеет проектировать серверную логику, работать с PostgreSQL, HTTP-запросами и обработкой ошибок.`,
-    'Юридический бэкграунд помогает ей внимательно анализировать требования, структурировать информацию и доводить решения до рабочего состояния.',
-    'Сейчас Надежда ищет первую коммерческую роль в разработке, где сможет применить ответственность, аккуратность и backend-навыки на пользу продукту.',
-  ].join(' ');
+  return variants[Math.floor(Math.random() * variants.length)].join(' ');
 }
 
 function getOpenAiErrorDetails(error: unknown): Record<string, unknown> {
