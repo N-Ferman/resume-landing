@@ -1,10 +1,10 @@
 import type { ContactFormData, ContactResponse } from '../types/contact.types';
-import { API_BASE_URL, getBackendErrorMessage } from './apiClient';
-
-const CONTACT_ENDPOINT = `${API_BASE_URL}/api/contact`;
+import { getApiBaseUrl, getBackendErrorMessage } from './apiClient';
 
 export async function sendContactForm(data: ContactFormData): Promise<ContactResponse> {
-  const response = await fetch(CONTACT_ENDPOINT, {
+  const contactEndpoint = `${getApiBaseUrl()}/api/contact`;
+
+  const response = await fetch(contactEndpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,10 +1,10 @@
 import type { AiSummaryResponse } from '../types/ai.types';
-import { API_BASE_URL, getBackendErrorMessage } from './apiClient';
-
-const AI_SUMMARY_ENDPOINT = `${API_BASE_URL}/api/ai/summary`;
+import { getApiBaseUrl, getBackendErrorMessage } from './apiClient';
 
 export async function generateAiSummary(): Promise<AiSummaryResponse> {
-  const response = await fetch(AI_SUMMARY_ENDPOINT, {
+  const aiSummaryEndpoint = `${getApiBaseUrl()}/api/ai/summary`;
+
+  const response = await fetch(aiSummaryEndpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

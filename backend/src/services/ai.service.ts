@@ -49,7 +49,23 @@ export async function generateProfileSummary(): Promise<string> {
       throw error;
     }
 
-    console.error('AI request failed:', error);
+    console.error('AI request failed:', getOpenAiErrorDetails(error));
     throw new AppError('Failed to generate AI summary. Please try again later.', 502);
   }
+}
+
+function getOpenAiErrorDetails(error: unknown): Record<string, unknown> {
+  if (error && typeof error === 'object') {
+    return {
+      name: 'name' in error ? error.name : undefined,
+      status: 'status' in error ? error.status : undefined,
+      code: 'code' in error ? error.code : undefined,
+      type: 'type' in error ? error.type : undefined,
+      message: 'message' in error ? error.message : undefined,
+    };
+  }
+
+  return {
+    message: String(error),
+  };
 }

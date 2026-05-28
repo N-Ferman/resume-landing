@@ -7,9 +7,18 @@ describe('apiClient', () => {
   });
 
   it('normalizes VITE_API_URL', async () => {
-    const { API_BASE_URL } = await import('./apiClient');
+    const { getApiBaseUrl } = await import('./apiClient');
 
-    expect(API_BASE_URL).toBe('http://localhost:5000');
+    expect(getApiBaseUrl()).toBe('http://localhost:5000');
+  });
+
+  it('throws a clear error when VITE_API_URL is missing', async () => {
+    vi.unstubAllEnvs();
+    vi.stubEnv('VITE_API_URL', '');
+
+    const { getApiBaseUrl } = await import('./apiClient');
+
+    expect(() => getApiBaseUrl()).toThrow('VITE_API_URL is not defined.');
   });
 
   it('extracts backend message from error response', async () => {

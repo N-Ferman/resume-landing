@@ -3,13 +3,15 @@ interface ApiErrorResponse {
   errors?: Record<string, string[]>;
 }
 
-const apiUrl = import.meta.env.VITE_API_URL;
+export function getApiBaseUrl(): string {
+  const apiUrl = import.meta.env.VITE_API_URL;
 
-if (!apiUrl) {
-  throw new Error('VITE_API_URL is not defined.');
+  if (!apiUrl) {
+    throw new Error('VITE_API_URL is not defined. Create frontend/.env with VITE_API_URL=http://localhost:5000.');
+  }
+
+  return apiUrl.replace(/\/$/, '');
 }
-
-export const API_BASE_URL = apiUrl.replace(/\/$/, '');
 
 export async function getBackendErrorMessage(response: Response): Promise<string> {
   const fallbackMessage = `Request failed with status ${response.status}.`;
