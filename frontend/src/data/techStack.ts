@@ -1,1 +1,15 @@
-export const techStack = ['Python', 'Django', 'Flask', 'PostgreSQL', 'Git', 'HTML5', 'CSS3'];
+export const techStack = [
+  'Python',
+  'Django',
+  'Django REST Framework',
+  'FastAPI',
+  'Flask',
+  'PostgreSQL',
+  'SQLAlchemy',
+  'JWT',
+  'Docker',
+  'Pytest',
+  'Git',
+  'HTML5',
+  'CSS3',
+];

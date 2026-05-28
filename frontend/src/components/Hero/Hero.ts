@@ -10,8 +10,8 @@ export function createHeroSection(): HTMLElement {
       </nav>
       <div class="hero__content container">
         <div class="hero__copy">
-          <p class="eyebrow">${profile.role}</p>
-          <h1>${profile.name}</h1>
+          <p class="hero__name">${profile.name}</p>
+          <h1>${profile.role}</h1>
           <p class="hero__description">${profile.intro}</p>
           <div class="hero__actions">
             <a class="button button--primary" href="#contacts">Связаться</a>

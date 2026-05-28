@@ -173,6 +173,20 @@ textarea:focus-visible {
   font-size: 1.12rem;
 }
 
+.hero h1 {
+  max-width: 820px;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero__name {
+  margin-bottom: 14px;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+  font-weight: 900;
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;

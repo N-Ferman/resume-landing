@@ -2,9 +2,9 @@ export const profile = {
   name: 'Ферман Надежда',
   role: 'Python Backend Developer (Junior)',
   intro:
-    'Junior Python backend-разработчик с фокусом на Django, Flask, PostgreSQL и создании понятных серверных приложений.',
+    'Junior Python backend-разработчик с фокусом на REST API, Django, FastAPI, Flask, PostgreSQL и понятную серверную архитектуру.',
   experience:
-    'В рамках обучения на Хекслете реализовала 4 учебных проекта, приближенных к задачам коммерческой разработки. Освоила Django, Flask, PostgreSQL, работу с HTTP-запросами, базами данных и Git.',
+    'В рамках обучения и pet-проектов реализовала backend- и fullstack-приложения на Python с использованием Django, Flask, FastAPI, PostgreSQL, SQLAlchemy, Docker и Pytest.',
   contacts: {
     email: 'nferman01@gmail.com',
     telegram: 'https://t.me/N_Ferman',
@@ -14,7 +14,14 @@ export const profile = {
     'Хекслет: профессия «Python-разработчик»',
     'Высшее образование: Московская государственная юридическая академия',
   ],
-  directions: ['Python backend-разработка', 'Django и Flask приложения', 'Работа с PostgreSQL', 'HTTP-запросы и обработка ошибок'],
+  directions: [
+    'Python backend-разработка',
+    'REST API',
+    'Django / DRF / Flask / FastAPI',
+    'PostgreSQL и ORM',
+    'Аутентификация и авторизация',
+    'Docker и тестирование API',
+  ],
   workflow: {
     architecture:
       'Сначала разбираю предметную область, выделяю сущности, продумываю структуру БД и разделяю логику по понятным модулям.',
