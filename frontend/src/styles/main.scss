@@ -208,6 +208,19 @@ textarea:focus-visible {
   color: var(--color-muted);
 }
 
+.contact-links {
+  display: grid;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-links a {
+  color: var(--color-primary-dark);
+  font-weight: 900;
+}
+
 .workflow,
 .contacts {
   background: #eeeeE7;
@@ -233,6 +246,13 @@ textarea:focus-visible {
   margin-bottom: 0;
   color: var(--color-text);
   font-weight: 700;
+}
+
+.project-card__link {
+  display: inline-flex;
+  margin-top: 16px;
+  color: var(--color-primary-dark);
+  font-weight: 900;
 }
 
 .ai-summary__inner {

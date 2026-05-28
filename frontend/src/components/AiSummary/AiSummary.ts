@@ -8,7 +8,7 @@ export function createAiSummarySection(): HTMLElement {
         <div>
           <p class="eyebrow">AI-интеграция</p>
           <h2 id="ai-summary-title">AI-summary профиля</h2>
-          <p>Запрос идет через frontend API-модуль. На backend этапе ключ AI API будет храниться только на сервере.</p>
+          <p>Запрос идет через backend, где хранится API-ключ. Frontend получает только готовый текст summary.</p>
         </div>
         <div class="ai-summary__actions">
           <button class="button button--secondary" type="button" data-ai-button>

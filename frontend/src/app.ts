@@ -1,5 +1,6 @@
 import { createAboutSection } from './components/About/About';
 import { createAiSummarySection } from './components/AiSummary/AiSummary';
+import { createCertificateSection } from './components/Certificate/Certificate';
 import { createContactFormSection } from './components/ContactForm/ContactForm';
 import { createFooter } from './components/Footer/Footer';
 import { createHeroSection } from './components/Hero/Hero';
@@ -12,6 +13,7 @@ export function createApp(root: HTMLElement): void {
     createAboutSection(),
     createWorkflowSection(),
     createProjectsSection(),
+    createCertificateSection(),
     createAiSummarySection(),
     createContactFormSection(),
     createFooter(),

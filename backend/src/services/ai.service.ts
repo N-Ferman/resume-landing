@@ -18,6 +18,17 @@ export async function generateProfileSummary(): Promise<string> {
     `Experience: ${profilePromptData.experience}`,
     `Tech stack: ${profilePromptData.techStack.join(', ')}`,
     `Directions: ${profilePromptData.directions.join(', ')}`,
+    `Education: ${profilePromptData.education.join('; ')}`,
+    `About: ${profilePromptData.about}`,
+    'Projects:',
+    ...profilePromptData.projects.map((project) =>
+      [
+        `- ${project.title}`,
+        `  Description: ${project.description}`,
+        `  Stack: ${project.stack.join(', ')}`,
+        `  Contribution: ${project.contribution}`,
+      ].join('\n'),
+    ),
   ].join('\n');
 
   try {

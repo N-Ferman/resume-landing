@@ -10,6 +10,7 @@ export function createProjectsSection(): HTMLElement {
           <p>${project.description}</p>
           <ul class="tag-list">${project.stack.map((item) => `<li>${item}</li>`).join('')}</ul>
           <p class="project-card__contribution">${project.contribution}</p>
+          ${project.link ? `<a class="project-card__link" href="${project.link}" target="_blank" rel="noreferrer">Открыть проект</a>` : ''}
         </article>
       `,
     )

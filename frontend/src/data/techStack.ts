@@ -1,1 +1,1 @@
-export const techStack = ['HTML5', 'CSS', 'SCSS', 'JavaScript', 'TypeScript', 'Node.js', 'REST API', 'Git'];
+export const techStack = ['Python', 'Django', 'Flask', 'PostgreSQL', 'Git', 'HTML5', 'CSS3'];

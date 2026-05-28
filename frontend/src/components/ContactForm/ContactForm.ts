@@ -1,4 +1,5 @@
 import { sendContactForm } from '../../api/contactApi';
+import { profile } from '../../data/profile';
 import type { ContactFormData, ContactFormErrors } from '../../types/contact.types';
 import { createElementFromHtml } from '../../utils/dom';
 import { hasValidationErrors, validateContactForm } from '../../utils/validation';
@@ -12,12 +13,17 @@ export function createContactFormSection(): HTMLElement {
         <div>
           <p class="eyebrow">Контакты</p>
           <h2 id="contacts-title">Написать мне</h2>
-          <p>Форма подготовлена для будущего backend endpoint, который отправит email владельцу сайта и подтверждение пользователю.</p>
+          <p>Можно отправить сообщение через форму или связаться напрямую.</p>
+          <ul class="contact-links">
+            <li><a href="mailto:${profile.contacts.email}">${profile.contacts.email}</a></li>
+            <li><a href="${profile.contacts.telegram}" target="_blank" rel="noreferrer">Telegram</a></li>
+            <li><a href="${profile.contacts.github}" target="_blank" rel="noreferrer">GitHub</a></li>
+          </ul>
         </div>
         <form class="contact-form" novalidate>
           <label>
             <span>Имя</span>
-            <input name="name" type="text" autocomplete="name" placeholder="[Ваше имя]" />
+            <input name="name" type="text" autocomplete="name" placeholder="Ваше имя" />
             <small data-error-for="name"></small>
           </label>
           <label>

@@ -13,6 +13,22 @@ export function getApiBaseUrl(): string {
   return apiUrl.replace(/\/$/, '');
 }
 
+export async function requestJson<TResponse>(path: string, init: RequestInit): Promise<TResponse> {
+  let response: Response;
+
+  try {
+    response = await fetch(`${getApiBaseUrl()}${path}`, init);
+  } catch {
+    throw new Error('Backend is not available. Start the backend server and try again.');
+  }
+
+  if (!response.ok) {
+    throw new Error(await getBackendErrorMessage(response));
+  }
+
+  return response.json() as Promise<TResponse>;
+}
+
 export async function getBackendErrorMessage(response: Response): Promise<string> {
   const fallbackMessage = `Request failed with status ${response.status}.`;
 

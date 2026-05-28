@@ -2,21 +2,30 @@ import type { Project } from '../types/project.types';
 
 export const projects: Project[] = [
   {
-    title: '[Проект 1]',
-    description: 'Лендинг или веб-интерфейс с адаптивной версткой и модульной структурой.',
-    stack: ['HTML5', 'SCSS', 'TypeScript'],
-    contribution: 'Реализовал структуру страниц, UI-компоненты, адаптивность и базовую интерактивность.',
+    title: 'Task Manager',
+    description:
+      'Django-приложение для управления задачами, постановки целей и отслеживания их статусов.',
+    link: 'https://clck.ru/3TSqfx',
+    stack: ['Python', 'Django', 'PostgreSQL'],
+    contribution:
+      'Реализовала аутентификацию и авторизацию пользователей, CRUD-операции для задач, статусов и меток, а также спроектировала схему БД с использованием Django ORM.',
   },
   {
-    title: '[Проект 2]',
-    description: 'Приложение с отправкой данных на backend и обработкой пользовательских состояний.',
-    stack: ['TypeScript', 'Node.js', 'REST API'],
-    contribution: 'Настроил работу с API, обработку loading/success/error и клиентскую валидацию.',
+    title: 'Page Analyzer',
+    description:
+      'Fullstack-приложение на Flask для SEO-анализа веб-страниц: проверка статус-кодов, заголовков h1 и описаний.',
+    link: 'https://clck.ru/3TSqj2',
+    stack: ['Python', 'Flask', 'PostgreSQL', 'HTTP'],
+    contribution:
+      'Реализовала сбор данных с сайтов, хранение результатов в реляционной БД, работу с HTTP-запросами и обработку ошибок.',
   },
   {
-    title: '[Проект 3]',
-    description: 'Экспериментальный проект с AI-функцией через серверную часть.',
-    stack: ['TypeScript', 'Node.js', 'AI API'],
-    contribution: 'Спроектировал безопасную схему, где frontend обращается к AI только через backend.',
+    title: 'Gendiff',
+    description:
+      'Инструмент для поиска различий в конфигурационных файлах JSON и YAML.',
+    link: 'https://clck.ru/3TSqmd',
+    stack: ['Python', 'JSON', 'YAML'],
+    contribution:
+      'Реализовала рекурсивный обход структур данных и поддержку нескольких форматов вывода: stylish, plain и json.',
   },
 ];

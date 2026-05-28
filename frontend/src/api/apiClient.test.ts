@@ -1,9 +1,14 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('apiClient', () => {
   beforeEach(() => {
     vi.resetModules();
     vi.stubEnv('VITE_API_URL', 'http://localhost:5000/');
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllEnvs();
   });
 
   it('normalizes VITE_API_URL', async () => {
@@ -46,5 +51,18 @@ describe('apiClient', () => {
     );
 
     await expect(getBackendErrorMessage(response)).resolves.toBe('Email has invalid format.');
+  });
+
+  it('returns a readable message when backend is unavailable', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockRejectedValue(new TypeError('Failed to fetch')),
+    );
+
+    const { requestJson } = await import('./apiClient');
+
+    await expect(requestJson('/api/ai/summary', { method: 'POST' })).rejects.toThrow(
+      'Backend is not available.',
+    );
   });
 });
