@@ -1,0 +1,12 @@
+@mixin focus-ring {
+  outline: 3px solid rgb(19 95 99 / 0.28);
+  outline-offset: 3px;
+}
+
+@mixin section-spacing {
+  padding: 72px 0;
+
+  @media (min-width: 768px) {
+    padding: 96px 0;
+  }
+}
