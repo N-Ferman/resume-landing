@@ -53,9 +53,6 @@ export async function generateProfileSummary(): Promise<string> {
           content: prompt,
         },
       ],
-      temperature: 0.95,
-      presence_penalty: 0.4,
-      frequency_penalty: 0.35,
       max_tokens: 230,
     });
 
@@ -72,12 +69,8 @@ export async function generateProfileSummary(): Promise<string> {
 
     return removeMarkdown(summary);
   } catch (error) {
-    if (error instanceof AppError) {
-      throw error;
-    }
-
-    console.error('AI request failed:', getOpenAiErrorDetails(error));
-    throw new AppError('Failed to generate AI summary. Please try again later.', 502);
+    console.error('AI request failed, using fallback summary:', getOpenAiErrorDetails(error));
+    return createFallbackSummary();
   }
 }
 
@@ -98,14 +91,14 @@ function createFallbackSummary(): string {
   const mainStack = profilePromptData.techStack.slice(0, 7).join(', ');
   const variants = [
     [
-      `${profilePromptData.name} — ${profilePromptData.role} с фокусом на Python backend-разработку и создании REST API.`,
+      `${profilePromptData.name} — ${profilePromptData.role} с фокусом на Python backend-разработку и создание REST API.`,
       `В портфолио есть проекты ${projectNames}, где она работала с серверной архитектурой, базами данных, аутентификацией, ORM и тестированием.`,
       `Основной стек включает ${mainStack}, а также Docker и практику backend-валидации.`,
       'Юридический опыт помогает ей внимательно анализировать требования, структурировать информацию и доводить решения до рабочего состояния.',
       'Сейчас Надежда ищет первую коммерческую позицию, где сможет применить аккуратность, ответственность и backend-навыки на пользу продукту.',
     ],
     [
-      `${profilePromptData.name} развиваетcя как ${profilePromptData.role} и делает упор на backend-приложения на Python.`,
+      `${profilePromptData.name} развивается как ${profilePromptData.role} и делает упор на backend-приложения на Python.`,
       `Среди ее проектов — ${projectNames}, которые показывают работу с REST API, PostgreSQL, ролями доступа, Docker и автотестами.`,
       `Она использует ${mainStack} и уделяет внимание структуре БД, обработке ошибок и понятной архитектуре.`,
       'Бэкграунд в юриспруденции усиливает ее внимательность к деталям и умение разбирать сложные требования.',

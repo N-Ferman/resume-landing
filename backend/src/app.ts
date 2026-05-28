@@ -8,6 +8,8 @@ import { healthRoutes } from './routes/health.routes.js';
 
 export const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(corsMiddleware);
 app.use(express.json({ limit: '32kb' }));
 app.use(rateLimitMiddleware);
