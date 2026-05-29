@@ -15,17 +15,18 @@ const transporter = nodemailer.createTransport({
 
 export async function sendContactEmails(data: ContactRequestBody): Promise<void> {
   try {
-    await Promise.all([sendOwnerEmail(data), sendUserConfirmationEmail(data)]);
+    await sendContactEmailWithUserCopy(data);
   } catch (error) {
-    console.error('Email sending failed:', error);
+    console.error('Email sending failed:', getEmailErrorDetails(error));
     throw new AppError('Failed to send email. Please try again later.', 502);
   }
 }
 
-async function sendOwnerEmail(data: ContactRequestBody): Promise<void> {
+async function sendContactEmailWithUserCopy(data: ContactRequestBody): Promise<void> {
   await transporter.sendMail({
     from: env.SMTP_FROM,
     to: env.OWNER_EMAIL,
+    cc: data.email,
     replyTo: data.email,
     subject: `New portfolio contact request from ${data.name}`,
     text: [
@@ -37,23 +38,24 @@ async function sendOwnerEmail(data: ContactRequestBody): Promise<void> {
       '',
       'Message:',
       data.message,
+      '',
+      'A copy of this email was sent to the contact email provided by the user.',
     ].join('\n'),
   });
 }
 
-async function sendUserConfirmationEmail(data: ContactRequestBody): Promise<void> {
-  await transporter.sendMail({
-    from: env.SMTP_FROM,
-    to: data.email,
-    subject: 'Your message was received',
-    text: [
-      `Hello, ${data.name}.`,
-      '',
-      'Thank you for contacting me through my portfolio website.',
-      'I received your message and will reply as soon as possible.',
-      '',
-      'Your message:',
-      data.message,
-    ].join('\n'),
-  });
+function getEmailErrorDetails(error: unknown): Record<string, unknown> {
+  if (error && typeof error === 'object') {
+    return {
+      name: 'name' in error ? error.name : undefined,
+      code: 'code' in error ? error.code : undefined,
+      command: 'command' in error ? error.command : undefined,
+      responseCode: 'responseCode' in error ? error.responseCode : undefined,
+      message: 'message' in error ? error.message : undefined,
+    };
+  }
+
+  return {
+    message: String(error),
+  };
 }

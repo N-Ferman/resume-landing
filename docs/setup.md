@@ -39,6 +39,18 @@ OPENAI_MODEL=gpt-4o-mini
 
 Do not commit real secrets.
 
+For production deploys, replace all SMTP placeholders with real provider values in the backend hosting
+environment. The contact form cannot send email while `SMTP_HOST=smtp.example.com`,
+`SMTP_USER=your_smtp_user`, or `SMTP_PASS=your_smtp_password` are still used.
+
+Common SMTP settings:
+
+- Port `587`: `SMTP_SECURE=false`
+- Port `465`: `SMTP_SECURE=true` or omit it, because the backend enables secure SMTP automatically for port `465`
+
+On Vercel, set `VITE_API_URL` to the deployed backend URL. In the current split deploy setup, the frontend
+does not serve `/api/*` itself; it calls the Render backend.
+
 ## Install
 
 ```bash

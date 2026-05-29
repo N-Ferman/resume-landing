@@ -9,9 +9,9 @@ const envSchema = z.object({
   SMTP_HOST: z.string().min(1),
   SMTP_PORT: z.coerce.number().int().positive(),
   SMTP_SECURE: z
-    .string()
-    .default('false')
-    .transform((value) => value === 'true'),
+    .enum(['true', 'false'])
+    .optional()
+    .transform((value) => (value ? value === 'true' : undefined)),
   SMTP_USER: z.string().min(1),
   SMTP_PASS: z.string().min(1),
   SMTP_FROM: z.string().min(1),
@@ -26,4 +26,7 @@ if (!parsedEnv.success) {
   throw new Error('Environment validation failed.');
 }
 
-export const env = parsedEnv.data;
+export const env = {
+  ...parsedEnv.data,
+  SMTP_SECURE: parsedEnv.data.SMTP_SECURE ?? parsedEnv.data.SMTP_PORT === 465,
+};
