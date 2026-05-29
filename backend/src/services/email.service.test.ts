@@ -3,6 +3,12 @@ import type { ContactRequestBody } from '../types/contact.types.js';
 
 const sendMailMock = vi.fn();
 
+vi.mock('node:dns', () => ({
+  promises: {
+    resolve4: vi.fn().mockResolvedValue(['142.250.102.108']),
+  },
+}));
+
 vi.mock('nodemailer', () => ({
   default: {
     createTransport: vi.fn(() => ({
