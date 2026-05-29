@@ -3,6 +3,8 @@ interface ApiErrorResponse {
   errors?: Record<string, string[]>;
 }
 
+const REQUEST_TIMEOUT_MS = 20_000;
+
 export function getApiBaseUrl(): string {
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -15,11 +17,22 @@ export function getApiBaseUrl(): string {
 
 export async function requestJson<TResponse>(path: string, init: RequestInit): Promise<TResponse> {
   let response: Response;
+  const controller = new AbortController();
+  const timeoutId = globalThis.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
-    response = await fetch(`${getApiBaseUrl()}${path}`, init);
-  } catch {
+    response = await fetch(`${getApiBaseUrl()}${path}`, {
+      ...init,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new Error('Request timed out. Please try again later.');
+    }
+
     throw new Error('Backend is not available. Start the backend server and try again.');
+  } finally {
+    globalThis.clearTimeout(timeoutId);
   }
 
   if (!response.ok) {
